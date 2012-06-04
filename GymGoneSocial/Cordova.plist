@@ -21,9 +21,17 @@
 	<key>OpenAllWhitelistURLsInWebView</key>
 	<false/>
 	<key>ExternalHosts</key>
-	<array/>
+	<array>
+		<string>m.facebook.com</string>
+		<string>graph.facebook.com</string>
+		<string>api.facebook.com</string>
+		<string>*.fbcdn.net</string>
+		<string>*.akamaihd.net</string>
+	</array>
 	<key>Plugins</key>
 	<dict>
+		<key>org.apache.cordova.facebook.Connect</key>
+		<string>FacebookConnectPlugin</string>
 		<key>Compass</key>
 		<string>CDVLocation</string>
 		<key>Accelerometer</key>
