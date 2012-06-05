@@ -22,6 +22,7 @@
 	<false/>
 	<key>ExternalHosts</key>
 	<array>
+		<string>*</string>
 		<string>m.facebook.com</string>
 		<string>graph.facebook.com</string>
 		<string>api.facebook.com</string>
