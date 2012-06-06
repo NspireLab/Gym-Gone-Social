@@ -83,17 +83,31 @@
     
            <script>
                function showPosts() {
-                   FB.api({
-                          method: 'fql.query',
-                          query: 'SELECT post_id, actor_id, target_id, message FROM stream WHERE filter_key in (SELECT filter_key FROM stream_filter WHERE uid=me() AND type='newsfeed') AND is_hidden = 0'
-                          }, function(response){
+                   FB.api('/me/home', function(response) {
                           console.log(response);
+                          
+                          if (!response.error) {
+                          var markup = '';
+                          
+                          var messages = response.data;
+                          
+                          for (var i=0; i < messages.length && i < 5; i++) {
+                          var message = messages[i];
+                          
+                          markup += '<p><img src="' + message.picture + '">' + message.message + '<img src="https://graph.facebook.com/' + message.from['id'] + '/picture">' + message.from['name'] + '</p><br>';
                           }
                           
-                          );
-
-               </script>
+                          document.getElementById('newsfeedposts').innerHTML = markup;
+                          }
+                          });
+               }       
                
+               </script>
+       
+
+       <div id="newsfeedposts">
+       <h3>News Feed</h3>
+       </div>
        <div id="showposts">
            <p><button onClick="showPosts();">Posts</button></p>
        </div>        
@@ -114,7 +128,7 @@
                          alert('not logged in');
                          }
                          },
-                         { scope: "email, status_update" }
+                         { scope: "email, status_update, read_stream, user_photo, friends_photo" }
                          );
             }
             </script>
@@ -136,7 +150,7 @@
         <script>
             function getUserFriends() {
                 FB.api('/me/friends&fields=name,picture', function(response) {
-                       console.log('Got friends: ', response);
+                       console.log(response);
                        
                        if (!response.error) {
                        var markup = '';
