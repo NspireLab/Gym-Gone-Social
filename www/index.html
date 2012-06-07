@@ -94,7 +94,14 @@
                           for (var i=0; i < messages.length && i < 5; i++) {
                           var message = messages[i];
                           
-                          markup += '<p><img src="' + message.picture + '">' + message.message + '<img src="https://graph.facebook.com/' + message.from['id'] + '/picture">' + message.from['name'] + '</p><br>';
+                          if (typeof message.picture != 'undefined' || 'null') {
+                            var postImage = '<img src="' + message.picture + '">';
+                          }else{
+                            var postImage = '';
+                          
+                          }
+                          
+                          markup += '<p>' + postImage + message.message + '<img src="https://graph.facebook.com/' + message.from['id'] + '/picture">' + message.from['name'] + '</p><br>';
                           }
                           
                           document.getElementById('newsfeedposts').innerHTML = markup;
